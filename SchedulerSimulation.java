@@ -30,10 +30,17 @@ class Process implements Runnable {
     private int timeQuantum; // Time slice (time quantum) allowed per CPU access (in milliseconds)
     private int remainingTime; // Time left for the process to finish its execution
 
-    // Feat 1: Add priority
+    // Feat 1: 
     private int pr;
+   
+    // Feat 3:
+    private long arrivalTime;
+    private long waitingTime = 0;
+    private long lastReadyTime;
+
 
     // Constructor to initialize the process with name, burst time, and time quantum
+    
     // Feat 1: Add priority to the constructor !
     public Process(String name, int burstTime, int timeQuantum, int pr) {
         this.name = name;
@@ -41,6 +48,8 @@ class Process implements Runnable {
         this.timeQuantum = timeQuantum;
         this.remainingTime = burstTime; // Initially, remaining time is equal to the burst time
         this.pr = pr; // Feat 1
+        this.arrivalTime = System.currentTimeMillis();//Feat3
+        this.lastReadyTime = arrivalTime;//Feat3
     }
 
     // This method will be called when the thread for this process is started
@@ -152,6 +161,21 @@ class Process implements Runnable {
     public boolean isFinished() {
         return remainingTime <= 0;
     }
+    // Feat 3: 
+    public void updateWaitingTime() {
+    long now = System.currentTimeMillis();
+    waitingTime += (now - lastReadyTime);
+}
+
+   // Feat 3: 
+    public void setLastReadyTime() {
+    lastReadyTime = System.currentTimeMillis();
+}
+
+   // Feat 3:
+    public long getWaitingTime() {
+    return waitingTime;
+}
 }
 
 public class SchedulerSimulation {
@@ -261,7 +285,12 @@ public class SchedulerSimulation {
             System.out.println(Colors.BRIGHT_WHITE + "]" + Colors.RESET);
             System.out.println(Colors.BOLD + Colors.MAGENTA + "└" + "─".repeat(79) + Colors.RESET + "\n");
 
-            // Start the thread, which will run the process for one time quantum
+
+            // Feat 3: 
+             processMap.get(currentThread).updateWaitingTime();
+            
+            
+             // Start the thread, which will run the process for one time quantum
             currentThread.start();
 
             try {
@@ -291,6 +320,13 @@ public class SchedulerSimulation {
                 }
             }
         }
+        //Feat3:
+                   System.out.println("\nProcess Summary:");
+                   System.out.println("Name\tBurst Time\tWaiting Time");
+
+                for (Process p : processMap.values()) {
+                   System.out.println(p.getName() + "\t" + p.getBurstTime() + "\t" + p.getWaitingTime());
+                }
 
         // Feat 2
         System.out.println("Total context switches: " + contextS);
@@ -321,6 +357,10 @@ public class SchedulerSimulation {
         // Map the thread to the process, so we can track the process associated with
         // each thread
         processMap.put(thread, process);
+
+        // Feat 3 :
+        process.setLastReadyTime();
+        
         // Feat 1
         // Print a message indicating the process has entered the ready queue
         System.out.println(Colors.BLUE + "  ➕ " + Colors.BOLD + Colors.CYAN + process.getName() +
