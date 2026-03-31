@@ -206,10 +206,10 @@ public class SchedulerSimulation {
         // Create 'numProcesses' number of processes
         for (int i = 1; i <= numProcesses; i++) {
             // Random burst time for each process between timeQuantum/2 and 3*timeQuantum
-            int burstTime = timeQuantum / 2 + random.nextInt(2 * timeQuantum + 1);
-
             // Feat 1
             int pr = 1 + random.nextInt(5);
+            int burstTime = timeQuantum / 2 + random.nextInt(2 * timeQuantum + 1);
+
             // Create a new process object with a unique name, burst time, and the defined
             // time quantum
 
