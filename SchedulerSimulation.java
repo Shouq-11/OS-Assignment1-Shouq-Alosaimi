@@ -155,6 +155,10 @@ class Process implements Runnable {
 }
 
 public class SchedulerSimulation {
+
+    // Feat 2
+    static int contextS = 0;
+
     public static void main(String[] args) {
         // ⚠️ IMPORTANT: Put your student ID here to seed the random number generator
         // This makes your output unique to you - DO NOT forget to change this!
@@ -237,6 +241,9 @@ public class SchedulerSimulation {
             // Get the next thread from the queue (FIFO)
             Thread currentThread = processQueue.poll(); // Dequeues the next thread
 
+            // Feat 2
+            contextS++;
+
             // Print the current process queue (list of process IDs in the queue)
             System.out.println(Colors.BOLD + Colors.MAGENTA + "┌─ Ready Queue " + "─".repeat(65) + Colors.RESET);
             System.out.print(Colors.MAGENTA + "│ " + Colors.RESET + Colors.BRIGHT_WHITE + "[" + Colors.RESET);
@@ -284,6 +291,9 @@ public class SchedulerSimulation {
                 }
             }
         }
+
+        // Feat 2
+        System.out.println("Total context switches: " + contextS);
 
         // End of the scheduler simulation
         System.out.println(Colors.BOLD + Colors.BRIGHT_GREEN +
