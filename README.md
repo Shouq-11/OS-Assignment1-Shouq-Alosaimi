@@ -135,7 +135,7 @@ Open `SchedulerSimulation.java` and **immediately** change line 92:
 int studentID = 123456789;
 
 // AFTER (Use YOUR real ID):
-int studentID = 441234567;  // Replace with YOUR actual student ID
+int studentID = 445052114;  // Replace with YOUR actual student ID
 ```
 
 **Save this change and commit it right away**:
@@ -449,12 +449,12 @@ Submit a **text file** named: `YourName_StudentID_Assignment1.txt`
 
 **The file should contain:**
 ```
-Student Name: [Your Full Name]
-Student ID: [Your Student ID]
-GitHub Username: [your-github-username]
-Repository Link: https://github.com/[your-username]/OS-Assignment1-[YourName]
-Video Link: [Google Drive link - make sure it's accessible to anyone with the link]
-Date Submitted: [Submission Date]
+Student Name: [Shouq Mohsen Alosaimi]
+Student ID: [445052114]
+GitHub Username: [Shouq-11]
+Repository Link: https://github.com/Shouq-11/OS-Assignment1-Shouq-Alosaimi.git 
+Video Link: https://drive.google.com/file/d/1J_ciWCd40B3QnNmObn3KO4WNOfNF7NOu/view?usp=sharing
+Date Submitted: [April 2,2026]
 ```
 
 **Example:**
